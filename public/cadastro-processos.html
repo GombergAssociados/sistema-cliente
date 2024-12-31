@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Processos - Gomberg&Associados</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #D4AF37; /* Cor dourada */
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: black;
+            color: #fff;
+            padding: 10px 20px;
+        }
+
+        header img {
+            height: 60px;
+        }
+
+        header h1 {
+            font-size: 24px;
+            margin-left: 10px;
+        }
+
+        nav {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 5px;
+            text-decoration: none;
+            background-color: black;
+            color: #D4AF37;
+            border: 1px solid #fff;
+            border-radius: 5px;
+        }
+
+        nav a:hover {
+            background-color: #D4AF37;
+            color: black;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: black;
+            color: #D4AF37;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #D4AF37;
+            color: black;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            text-align: center;
+            padding: 10px;
+        }
+
+        .actions button {
+            width: auto;
+            margin: 5px;
+            padding: 5px 10px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+            <img src="meulogo.png" alt="Logo Gomberg&Associados">
+        </div>
+        <h1>Cadastro de Processos</h1>
+    </header>
+    <nav>
+        <a href="area-administrativa.html">Voltar à Área Administrativa</a>
+    </nav>
+    <div class="container">
+        <h2>Adicionar Novo Processo</h2>
+        <form id="form-processo">
+            <label for="cliente">Cliente:</label>
+            <select id="cliente" name="cliente" required>
+                <option value="">Selecione um cliente</option>
+                <!-- Opções serão preenchidas dinamicamente -->
+            </select>
+
+            <label for="numero-processo">Número do Processo:</label>
+            <input type="text" id="numero-processo" name="numero-processo" placeholder="Digite o número do processo" required>
+
+            <label for="descricao">Descrição:</label>
+            <textarea id="descricao" name="descricao" placeholder="Descreva o processo" rows="4" required></textarea>
+
+            <label for="status">Status:</label>
+            <select id="status" name="status" required>
+                <option value="ativo">Ativo</option>
+                <option value="pendente">Pendente</option>
+                <option value="finalizado">Finalizado</option>
+            </select>
+
+            <button type="submit">Cadastrar Processo</button>
+        </form>
+
+        <h2>Processos Cadastrados</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Cliente</th>
+                    <th>Número do Processo</th>
+                    <th>Descrição</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="tabela-processos">
+                <!-- Linhas serão preenchidas dinamicamente -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Exemplo de clientes
+        const clientes = [
+            { id: 1, nome: "Luiz Roberto" },
+            { id: 2, nome: "Maria Clara" },
+        ];
+
+        // Adicionar opções de clientes
+        const clienteSelect = document.getElementById('cliente');
+        clientes.forEach(cliente => {
+            const option = document.createElement('option');
+            option.value = cliente.id;
+            option.textContent = cliente.nome;
+            clienteSelect.appendChild(option);
+        });
+
+        // Adicionar processos
+        const formProcesso = document.getElementById('form-processo');
+        const tabelaProcessos = document.getElementById('tabela-processos');
+
+        let processos = [];
+
+        formProcesso.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const clienteId = clienteSelect.value;
+            const clienteNome = clienteSelect.options[clienteSelect.selectedIndex].text;
+            const numeroProcesso = document.getElementById('numero-processo').value;
+            const descricao = document.getElementById('descricao').value;
+            const status = document.getElementById('status').value;
+
+            const novoProcesso = {
+                id: processos.length + 1,
+                clienteId,
+                clienteNome,
+                numeroProcesso,
+                descricao,
+                status,
+            };
+
+            processos.push(novoProcesso);
+            atualizarTabela();
+            formProcesso.reset();
+        });
+
+        function atualizarTabela() {
+            tabelaProcessos.innerHTML = '';
+            processos.forEach(processo => {
+                const row = tabelaProcessos.insertRow();
+                row.innerHTML = `
+                    <td>${processo.id}</td>
+                    <td>${processo.clienteNome}</td>
+                    <td>${processo.numeroProcesso}</td>
+                    <td>${processo.descricao}</td>
+                    <td>${processo.status}</td>
+                    <td class="actions">
+                        <button onclick="editarProcesso(${processo.id})">Editar</button>
+                        <button onclick="excluirProcesso(${processo.id})">Excluir</button>
+                    </td>
+                `;
+            });
+        }
+
+        function editarProcesso(id) {
+            const processo = processos.find(p => p.id === id);
+
+            if (processo) {
+                document.getElementById('cliente').value = processo.clienteId;
+                document.getElementById('numero-processo').value = processo.numeroProcesso;
+                document.getElementById('descricao').value = processo.descricao;
+                document.getElementById('status').value = processo.status;
+
+                excluirProcesso(id);
+            }
+        }
+
+        function excluirProcesso(id) {
+            processos = processos.filter(processo => processo.id !== id);
+            atualizarTabela();
+        }
+    </script>
+</body>
+</html>
