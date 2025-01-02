@@ -20,17 +20,16 @@
             text-align: center;
         }
 
-         .logo {
+        .logo {
             margin: 0;
             font-size: 2.5rem;
             display: flex;
-            justify-content: center; /* Center the content horizontally */
-            align-items: center; /* Center the content vertically */
+            justify-content: center;
+            align-items: center;
         }
-         .logo img {
-             max-width: 300px;
-         }
-
+        .logo img {
+            max-width: 300px;
+        }
 
         /* Botões centrais na área amarela */
         .buttons-container {
@@ -62,6 +61,19 @@
             margin: 20px auto;
             max-width: 800px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        #welcome-message {
+            text-align: center;
+            background-color: #fff;
+            margin: 0 auto;
+            max-width: 800px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            font-size: 2.5em; /* Adjusted size for single line */
+            font-family: 'Algerian', sans-serif; /* Algerian font for main text */
+            color: #222;/* Darker color for main text */
+             padding: 5px;/* Reduced padding to minimize height */
         }
 
         /* Redes sociais */
@@ -119,6 +131,10 @@
         <!-- Conteúdo dinâmico será carregado aqui -->
     </main>
 
+     <div id="welcome-message">
+        <p>Seja Bem vindo(a) ao nosso site Jurídico</p>
+    </div>
+
     <!-- Redes sociais -->
     <div class="socials">
         <h2>Nossas Redes Sociais</h2>
@@ -165,21 +181,24 @@
             const dynamicContent = document.getElementById('dynamic-content');
             dynamicContent.innerHTML = content[section] || '<p>Seção não encontrada.</p>';
             addBackButton();
+             // Remove o texto da página principal ao navegar para outra seção
+            const welcomeMessage = document.getElementById('welcome-message');
+            if(welcomeMessage){
+                welcomeMessage.style.display = 'none';
+            }
         }
 
-        // Função para exibir contatos
-        function showContact() {
+         function goBack() {
             const dynamicContent = document.getElementById('dynamic-content');
-            dynamicContent.innerHTML = `
-                <h2>Nossos Contatos</h2>
-                <p>WhatsApp: <a href="https://wa.me/5511973383818" target="_blank">(11) 9.7338-3818</a></p>
-                <p>Email: <a href="mailto:gombergeassociados@gmail.com">gombergeassociados@gmail.com</a></p>
-            `;
-            addBackButton();
-        }
+            dynamicContent.innerHTML = '';
+            //mostra a mensagem de boas vindas quando retorna para a página inicial
+             const welcomeMessage = document.getElementById('welcome-message');
+              if(welcomeMessage){
+                welcomeMessage.style.display = 'block';
+            }
 
-        // Função para exibir login da área administrativa
-        function showAdminLogin() {
+        }
+          function showAdminLogin() {
             const dynamicContent = document.getElementById('dynamic-content');
             dynamicContent.innerHTML = `
                 <div style="text-align: center;">
@@ -190,6 +209,26 @@
                     <button onclick="goBack()" style="padding: 10px 20px;">Voltar</button>
                 </div>
             `;
+                // Remove o texto da página principal ao navegar para outra seção
+            const welcomeMessage = document.getElementById('welcome-message');
+            if(welcomeMessage){
+                welcomeMessage.style.display = 'none';
+            }
+        }
+        // Função para exibir contatos
+        function showContact() {
+            const dynamicContent = document.getElementById('dynamic-content');
+            dynamicContent.innerHTML = `
+                <h2>Nossos Contatos</h2>
+                <p>WhatsApp: <a href="https://wa.me/5511973383818" target="_blank">(11) 9.7338-3818</a></p>
+                <p>Email: <a href="mailto:gombergeassociados@gmail.com">gombergeassociados@gmail.com</a></p>
+            `;
+            addBackButton();
+             // Remove o texto da página principal ao navegar para outra seção
+             const welcomeMessage = document.getElementById('welcome-message');
+            if(welcomeMessage){
+                welcomeMessage.style.display = 'none';
+            }
         }
 
         // Função para autenticação
@@ -217,6 +256,11 @@
                 </div>
                 <div id="notes-display" style="margin-top: 20px;"></div>
             `;
+             // Remove o texto da página principal ao navegar para outra seção
+            const welcomeMessage = document.getElementById('welcome-message');
+            if(welcomeMessage){
+                welcomeMessage.style.display = 'none';
+            }
         }
 
         // Função para adicionar botão "Voltar"
@@ -225,52 +269,4 @@
             dynamicContent.innerHTML += `<button onclick="goBack()" style="padding: 10px 20px; margin-top: 20px;">Voltar</button>`;
         }
 
-        // Função para salvar nota
-        function saveNote() {
-            const noteContent = document.getElementById('note-content').value;
-            if (noteContent.trim()) {
-                const noteKey = `note-${Date.now()}`;
-                localStorage.setItem(noteKey, noteContent);
-                alert('Nota salva com sucesso!');
-                document.getElementById('note-content').value = '';
-            } else {
-                alert('O campo de nota está vazio.');
-            }
-        }
-
-        // Função para visualizar notas
-        function viewNotes() {
-            const notesDisplay = document.getElementById('notes-display');
-            notesDisplay.innerHTML = '<h3>Notas Salvas:</h3>';
-            Object.keys(localStorage).forEach(key => {
-                if (key.startsWith('note-')) {
-                    notesDisplay.innerHTML += `
-                        <div style="margin-bottom: 10px; padding: 10px; border: 1px solid #ccc;">
-                            <p>${localStorage.getItem(key)}</p>
-                            <button onclick="deleteNote('${key}')" style="padding: 5px 10px;">Excluir</button>
-                        </div>
-                    `;
-                }
-            });
-        }
-
-        // Função para excluir nota
-        function deleteNote(key) {
-            localStorage.removeItem(key);
-            alert('Nota excluída com sucesso!');
-            viewNotes();
-        }
-
-        // Função para deslogar
-        function logoutAdmin() {
-            showAdminLogin();
-        }
-
-        // Função para voltar para a página inicial
-        function goBack() {
-            const dynamicContent = document.getElementById('dynamic-content');
-            dynamicContent.innerHTML = '';
-        }
-    </script>
-</body>
-</html>
+        //
