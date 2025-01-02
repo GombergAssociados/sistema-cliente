@@ -20,10 +20,17 @@
             text-align: center;
         }
 
-        .logo h1 {
+         .logo {
             margin: 0;
             font-size: 2.5rem;
+            display: flex;
+            justify-content: center; /* Center the content horizontally */
+            align-items: center; /* Center the content vertically */
         }
+         .logo img {
+             max-width: 300px;
+         }
+
 
         /* Botões centrais na área amarela */
         .buttons-container {
@@ -93,7 +100,7 @@
     <!-- Cabeçalho preto -->
     <header>
         <div class="logo">
-            <h1>Gomberg&Associados</h1>
+            <img src="meulogo.png" alt="Gomberg&Associados Logo">
         </div>
     </header>
 
@@ -121,7 +128,7 @@
     </div>
 
     <footer>
-        <p>&copy; 2025 Gomberg&Associados. Todos os direitos reservados.</p>
+        <p>© 2025 Gomberg&Associados. Todos os direitos reservados.</p>
     </footer>
 
     <script>
