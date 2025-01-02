@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Gomberg&Associados</title>
+  <style>
+    body {
+      background-color: #FFD700; /* Fundo dourado */
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .header {
+      background-color: black;
+      color: white;
+      text-align: center;
+      padding: 10px;
+    }
+    .logo {
+      text-align: center;
+      margin: 20px 0;
+    }
+    .logo img {
+      width: 150px;
+      height: auto;
+    }
+    .login-form {
+      background-color: white;
+      padding: 20px;
+      margin: 20px auto;
+      width: 300px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .login-form label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    .login-form input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .login-form button {
+      width: 100%;
+      background-color: #FFD700;
+      color: black;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+    }
+    .login-form button:hover {
+      background-color: black;
+      color: white;
+    }
+    .back-button {
+      text-align: center;
+      margin-top: 10px;
+    }
+    .back-button button {
+      background-color: black;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+    .back-button button:hover {
+      background-color: #FFD700;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Login - Gomberg&Associados</h1>
+  </div>
+  <div class="logo">
+    <img src="meulogo.png" alt="Logo Gomberg&Associados">
+  </div>
+  <div class="login-form">
+    <form action="area-administrativa.html" method="POST">
+      <label for="username">Usuário:</label>
+      <input type="text" id="username" name="username" required>
+      <label for="password">Senha:</label>
+      <input type="password" id="password" name="password" required>
+      <button type="submit">Entrar</button>
+    </form>
+  </div>
+  <div class="back-button">
+    <button onclick="window.location.href='index.html'">Voltar</button>
+  </div>
+</body>
+</html>
