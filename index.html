@@ -62,18 +62,21 @@
             max-width: 800px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-        
+
         #welcome-message {
             text-align: center;
             background-color: #fff;
-            margin: 0 auto;
+            margin: 20px auto;
             max-width: 800px;
             border-radius: 5px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+            #welcome-message p{
             font-size: 2.5em; /* Adjusted size for single line */
             font-family: 'Algerian', sans-serif; /* Algerian font for main text */
             color: #222;/* Darker color for main text */
-             padding: 5px;/* Reduced padding to minimize height */
+            padding: 5px; /* Reduced padding to minimize height */
+            margin: 0; /*remove all margin */
         }
 
         /* Redes sociais */
@@ -131,7 +134,7 @@
         <!-- Conteúdo dinâmico será carregado aqui -->
     </main>
 
-     <div id="welcome-message">
+    <div id="welcome-message">
         <p>Seja Bem vindo(a) ao nosso site Jurídico</p>
     </div>
 
@@ -269,4 +272,47 @@
             dynamicContent.innerHTML += `<button onclick="goBack()" style="padding: 10px 20px; margin-top: 20px;">Voltar</button>`;
         }
 
-        //
+         // Função para salvar nota
+        function saveNote() {
+            const noteContent = document.getElementById('note-content').value;
+            if (noteContent.trim()) {
+                const noteKey = `note-${Date.now()}`;
+                localStorage.setItem(noteKey, noteContent);
+                alert('Nota salva com sucesso!');
+                document.getElementById('note-content').value = '';
+            } else {
+                alert('O campo de nota está vazio.');
+            }
+        }
+
+        // Função para visualizar notas
+        function viewNotes() {
+            const notesDisplay = document.getElementById('notes-display');
+            notesDisplay.innerHTML = '<h3>Notas Salvas:</h3>';
+            Object.keys(localStorage).forEach(key => {
+                if (key.startsWith('note-')) {
+                    notesDisplay.innerHTML += `
+                        <div style="margin-bottom: 10px; padding: 10px; border: 1px solid #ccc;">
+                            <p>${localStorage.getItem(key)}</p>
+                            <button onclick="deleteNote('${key}')" style="padding: 5px 10px;">Excluir</button>
+                        </div>
+                    `;
+                }
+            });
+        }
+
+        // Função para excluir nota
+        function deleteNote(key) {
+            localStorage.removeItem(key);
+            alert('Nota excluída com sucesso!');
+            viewNotes();
+        }
+
+
+        // Função para deslogar
+        function logoutAdmin() {
+            showAdminLogin();
+        }
+    </script>
+</body>
+</html>
