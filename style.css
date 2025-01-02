@@ -1,0 +1,145 @@
+        /* Fundo dourado */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #FFD700;
+            color: #333;
+        }
+
+        header {
+            background-color: #000;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        .logo {
+            margin: 0;
+            font-size: 2.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .logo img {
+            max-width: 300px;
+        }
+
+        /* Botões centrais na área amarela */
+        .buttons-container {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .buttons-container a {
+            color: #fff;
+            background-color: #000;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin: 10px;
+            display: inline-block;
+        }
+
+        .buttons-container a:hover {
+            background-color: #FFC107;
+        }
+
+        /* Conteúdo dinâmico */
+        #dynamic-content {
+            padding: 20px;
+            text-align: center;
+            background-color: #fff;
+            border-radius: 5px;
+            margin: 20px auto;
+            max-width: 800px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+		#dynamic-content h2 {
+			margin-bottom: 15px;
+		}
+        #welcome-message {
+            text-align: center;
+            background-color: #fff;
+            margin: 20px auto;
+            max-width: 800px;
+            border-radius: 5px;
+             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+            #welcome-message p{
+            font-size: 2.5em; /* Adjusted size for single line */
+            font-family: 'Algerian', sans-serif; /* Algerian font for main text */
+            color: #222;/* Darker color for main text */
+             padding: 5px;/* Reduced padding to minimize height */
+             margin: 0; /*remove all margin */
+        }
+
+        /* Redes sociais */
+        .socials {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .socials h2 {
+            margin-bottom: 15px;
+        }
+
+        .socials a {
+            color: #fff;
+            background-color: #000;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin: 5px;
+            display: inline-block;
+        }
+
+        .socials a:hover {
+            background-color: #FFC107;
+        }
+
+        footer {
+            background-color: transparent;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 20px;
+        }
+    .admin-container {
+      width: 80%;
+      margin: 20px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      text-align: center;
+    }
+    .admin-form input{
+        padding: 10px;
+        margin: 5px;
+        border-radius: 5px;
+        border: 1px solid #ccc
+    }
+    .admin-form button{
+        padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .admin-table {
+      width: 100%;
+      margin: 20px auto;
+      border-collapse: collapse;
+    }
+    .admin-table, .admin-table th, .admin-table td {
+      border: 1px solid #ccc;
+      padding: 5px;
+      text-align: center;
+    }
+    .admin-logout{
+      background-color: red;
+      color: white;
+      margin-bottom: 20px;
+    }
+    .admin-button{
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+     }

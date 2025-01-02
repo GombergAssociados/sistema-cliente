@@ -62,8 +62,10 @@
             max-width: 800px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-
-        #welcome-message {
+		#dynamic-content h2 {
+			margin-bottom: 15px;
+		}
+         #welcome-message {
             text-align: center;
             background-color: #fff;
             margin: 20px auto;
@@ -75,8 +77,8 @@
             font-size: 2.5em; /* Adjusted size for single line */
             font-family: 'Algerian', sans-serif; /* Algerian font for main text */
             color: #222;/* Darker color for main text */
-            padding: 5px; /* Reduced padding to minimize height */
-            margin: 0; /*remove all margin */
+             padding: 5px;/* Reduced padding to minimize height */
+             margin: 0; /*remove all margin */
         }
 
         /* Redes sociais */
@@ -151,6 +153,7 @@
     </footer>
 
     <script>
+    
         // Função para exibir conteúdo dinâmico
         function showContent(section) {
             const content = {
@@ -203,13 +206,11 @@
         }
           function showAdminLogin() {
             const dynamicContent = document.getElementById('dynamic-content');
-            dynamicContent.innerHTML = `
-                <div style="text-align: center;">
+             dynamicContent.innerHTML = `
+                <div class="admin-container">
                     <h2>Área Administrativa</h2>
-                    <input type="text" id="admin-login" placeholder="Login" style="padding: 10px; width: 80%; margin-bottom: 10px;"><br>
-                    <input type="password" id="admin-password" placeholder="Senha" style="padding: 10px; width: 80%; margin-bottom: 10px;"><br>
-                    <button onclick="authenticateAdmin()" style="padding: 10px 20px;">Entrar</button>
-                    <button onclick="goBack()" style="padding: 10px 20px;">Voltar</button>
+                    <button onclick="authenticateAdmin()" class="admin-button">Entrar</button>
+                    <button onclick="goBack()" class="admin-button">Voltar</button>
                 </div>
             `;
                 // Remove o texto da página principal ao navegar para outra seção
@@ -233,85 +234,10 @@
                 welcomeMessage.style.display = 'none';
             }
         }
-
-        // Função para autenticação
-        function authenticateAdmin() {
-            const login = document.getElementById('admin-login').value;
-            const password = document.getElementById('admin-password').value;
-
-            if (login === '08457245848' && password === 'Regina12@2024') {
-                showAdminPanel();
-            } else {
-                alert('Login ou senha incorretos!');
-            }
-        }
-
-        // Função para exibir painel administrativo
-        function showAdminPanel() {
-            const dynamicContent = document.getElementById('dynamic-content');
-            dynamicContent.innerHTML = `
-                <div style="text-align: center;">
-                    <h2>Painel Administrativo</h2>
-                    <textarea id="note-content" placeholder="Escreva sua nota aqui..." style="width: 80%; height: 100px; margin-bottom: 10px;"></textarea><br>
-                    <button onclick="saveNote()" style="padding: 10px 20px;">Salvar Nota</button>
-                    <button onclick="viewNotes()" style="padding: 10px 20px;">Visualizar Notas</button>
-                    <button onclick="logoutAdmin()" style="padding: 10px 20px;">Sair</button>
-                </div>
-                <div id="notes-display" style="margin-top: 20px;"></div>
-            `;
-             // Remove o texto da página principal ao navegar para outra seção
-            const welcomeMessage = document.getElementById('welcome-message');
-            if(welcomeMessage){
-                welcomeMessage.style.display = 'none';
-            }
-        }
-
-        // Função para adicionar botão "Voltar"
-        function addBackButton() {
+  function authenticateAdmin() {};
+       function addBackButton() {
             const dynamicContent = document.getElementById('dynamic-content');
             dynamicContent.innerHTML += `<button onclick="goBack()" style="padding: 10px 20px; margin-top: 20px;">Voltar</button>`;
-        }
-
-         // Função para salvar nota
-        function saveNote() {
-            const noteContent = document.getElementById('note-content').value;
-            if (noteContent.trim()) {
-                const noteKey = `note-${Date.now()}`;
-                localStorage.setItem(noteKey, noteContent);
-                alert('Nota salva com sucesso!');
-                document.getElementById('note-content').value = '';
-            } else {
-                alert('O campo de nota está vazio.');
-            }
-        }
-
-        // Função para visualizar notas
-        function viewNotes() {
-            const notesDisplay = document.getElementById('notes-display');
-            notesDisplay.innerHTML = '<h3>Notas Salvas:</h3>';
-            Object.keys(localStorage).forEach(key => {
-                if (key.startsWith('note-')) {
-                    notesDisplay.innerHTML += `
-                        <div style="margin-bottom: 10px; padding: 10px; border: 1px solid #ccc;">
-                            <p>${localStorage.getItem(key)}</p>
-                            <button onclick="deleteNote('${key}')" style="padding: 5px 10px;">Excluir</button>
-                        </div>
-                    `;
-                }
-            });
-        }
-
-        // Função para excluir nota
-        function deleteNote(key) {
-            localStorage.removeItem(key);
-            alert('Nota excluída com sucesso!');
-            viewNotes();
-        }
-
-
-        // Função para deslogar
-        function logoutAdmin() {
-            showAdminLogin();
         }
     </script>
 </body>
