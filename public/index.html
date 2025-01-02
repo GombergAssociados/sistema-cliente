@@ -1,93 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gomberg&Associados</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #FFD700; /* Cor de fundo dourado */
-      text-align: center;
-    }
-
-    .header {
-      background-color: #000;
-      padding: 20px 0;
-    }
-
-    .logo-container img {
-      width: 200px; /* Tamanho ajustado do logo */
-      margin: 0 auto;
-    }
-
-    .contacts {
-      color: #fff;
-      font-size: 18px;
-      margin: 10px 0;
-    }
-
-    .button-container {
-      margin: 10px 0;
-    }
-
-    .button {
-      background-color: #FFD700;
-      border: 1px solid #000;
-      padding: 10px 20px;
-      margin: 5px;
-      color: #000;
-      text-decoration: none;
-      font-weight: bold;
-      display: inline-block;
-    }
-
-    .button:hover {
-      background-color: #000;
-      color: #FFD700;
-    }
-
-    .main-content {
-      padding: 20px;
-    }
-
-    .admin-button {
-      background-color: #000;
-      color: #FFD700;
-      padding: 15px 30px;
-      text-decoration: none;
-      font-size: 16px;
-      font-weight: bold;
-      border-radius: 5px;
-      display: inline-block;
-      margin-top: 20px;
-    }
-
-    .admin-button:hover {
-      background-color: #FFD700;
-      color: #000;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gomberg & Associados</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+        .logo {
+            max-width: 200px;
+            margin: 10px auto;
+            display: block;
+        }
+        .contacts {
+            text-align: center;
+            margin-top: -10px; /* Ajuste para trazer mais próximo */
+            color: white;
+            font-size: 1.2em;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .contact-button {
+            background-color: #f1c40f;
+            color: black;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            text-transform: uppercase;
+            text-align: center;
+            text-decoration: none;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        .contact-button:hover {
+            background-color: #d4ac0d;
+            cursor: pointer;
+        }
+        .main-content {
+            text-align: center;
+            background-color: yellow;
+            height: calc(100vh - 150px); /* Ajustar para ocupar espaço */
+            padding-top: 50px;
+        }
+        .admin-button {
+            background-color: black;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            text-transform: uppercase;
+            text-align: center;
+            text-decoration: none;
+            margin-top: 20px;
+            display: inline-block;
+        }
+        .admin-button:hover {
+            background-color: #333;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-  <!-- Header Section -->
-  <div class="header">
-    <div class="logo-container">
-      <img src="meulogo.png" alt="Logo Gomberg&Associados">
+    <div class="header">
+        <img src="meulogo.png" alt="Logotipo Gomberg&Associados" class="logo">
+        <div class="contacts">
+            <span>Nossos Contatos</span>
+            <div class="button-container">
+                <a href="https://wa.me/5511973383818" target="_blank" class="contact-button">WhatsApp</a>
+                <a href="mailto:gombergeassociados@gmail.com" class="contact-button">E-mail</a>
+            </div>
+        </div>
     </div>
-    <div class="contacts">Nossos Contatos</div>
-    <div class="button-container">
-      <a href="https://wa.me/5511973383818" class="button" target="_blank">WHATSAPP</a>
-      <a href="mailto:gombergeassociados@gmail.com" class="button" target="_blank">E-MAIL</a>
+    <div class="main-content">
+        <h1>Seja bem-vindo, seja bem-vinda ao nosso site jurídico</h1>
+        <a href="area-administrativa.html" class="admin-button">Área Administrativa</a>
     </div>
-  </div>
-
-  <!-- Main Content Section -->
-  <div class="main-content">
-    <h1>Seja bem-vindo, seja bem-vinda ao nosso site jurídico</h1>
-    <a href="login.html" class="admin-button">ÁREA ADMINISTRATIVA</a>
-  </div>
 </body>
 </html>
