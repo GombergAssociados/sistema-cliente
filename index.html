@@ -1,93 +1,269 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gomberg&Associados</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #FFD700; /* Cor de fundo dourado */
-      text-align: center;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gomberg&Associados - Advogados Associados</title>
+    <style>
+        /* Fundo dourado */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #FFD700;
+            color: #333;
+        }
 
-    .header {
-      background-color: #000;
-      padding: 20px 0;
-    }
+        header {
+            background-color: #000;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
 
-    .logo-container img {
-      width: 200px; /* Tamanho ajustado do logo */
-      margin: 0 auto;
-    }
+        .logo h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
 
-    .contacts {
-      color: #fff;
-      font-size: 18px;
-      margin: 10px 0;
-    }
+        /* Botões centrais na área amarela */
+        .buttons-container {
+            padding: 20px;
+            text-align: center;
+        }
 
-    .button-container {
-      margin: 10px 0;
-    }
+        .buttons-container a {
+            color: #fff;
+            background-color: #000;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin: 10px;
+            display: inline-block;
+        }
 
-    .button {
-      background-color: #FFD700;
-      border: 1px solid #000;
-      padding: 10px 20px;
-      margin: 5px;
-      color: #000;
-      text-decoration: none;
-      font-weight: bold;
-      display: inline-block;
-    }
+        .buttons-container a:hover {
+            background-color: #FFC107;
+        }
 
-    .button:hover {
-      background-color: #000;
-      color: #FFD700;
-    }
+        /* Conteúdo dinâmico */
+        #dynamic-content {
+            padding: 20px;
+            text-align: center;
+            background-color: #fff;
+            border-radius: 5px;
+            margin: 20px auto;
+            max-width: 800px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
 
-    .main-content {
-      padding: 20px;
-    }
+        /* Redes sociais */
+        .socials {
+            text-align: center;
+            margin: 30px 0;
+        }
 
-    .admin-button {
-      background-color: #000;
-      color: #FFD700;
-      padding: 15px 30px;
-      text-decoration: none;
-      font-size: 16px;
-      font-weight: bold;
-      border-radius: 5px;
-      display: inline-block;
-      margin-top: 20px;
-    }
+        .socials h2 {
+            margin-bottom: 15px;
+        }
 
-    .admin-button:hover {
-      background-color: #FFD700;
-      color: #000;
-    }
-  </style>
+        .socials a {
+            color: #fff;
+            background-color: #000;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin: 5px;
+            display: inline-block;
+        }
+
+        .socials a:hover {
+            background-color: #FFC107;
+        }
+
+        footer {
+            background-color: transparent;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-  <!-- Header Section -->
-  <div class="header">
-    <div class="logo-container">
-      <img src="meulogo.png" alt="Logo Gomberg&Associados">
-    </div>
-    <div class="contacts">Nossos Contatos</div>
-    <div class="button-container">
-      <a href="https://wa.me/5511973383818" class="button" target="_blank">WHATSAPP</a>
-      <a href="mailto:gombergeassociados@gmail.com" class="button" target="_blank">E-MAIL</a>
-    </div>
-  </div>
+    <!-- Cabeçalho preto -->
+    <header>
+        <div class="logo">
+            <h1>Gomberg&Associados</h1>
+        </div>
+    </header>
 
-  <!-- Main Content Section -->
-  <div class="main-content">
-    <h1>Seja bem-vindo, seja bem-vinda ao nosso site jurídico</h1>
-    <a href="login.html" class="admin-button">ÁREA ADMINISTRATIVA</a>
-  </div>
+    <!-- Botões centrais na área amarela -->
+    <div class="buttons-container">
+        <a href="#" onclick="showContent('about')">Sobre Nós</a>
+        <a href="#" onclick="showContent('services')">Áreas de Atuação</a>
+        <a href="#" onclick="showContent('team')">Equipe</a>
+        <a href="#" onclick="showContact()">Nossos Contatos</a>
+        <a href="#" onclick="showContent('consult')">Agende uma Consulta</a>
+        <a href="#" onclick="showAdminLogin()">Área Administrativa</a>
+    </div>
+
+    <!-- Conteúdo dinâmico -->
+    <main id="dynamic-content">
+        <!-- Conteúdo dinâmico será carregado aqui -->
+    </main>
+
+    <!-- Redes sociais -->
+    <div class="socials">
+        <h2>Nossas Redes Sociais</h2>
+        <a href="https://www.facebook.com/profile.php?id=100085688431397" target="_blank">Facebook</a>
+        <a href="https://x.com/lui8179" target="_blank">Twitter (X)</a>
+        <a href="https://www.youtube.com/@LUIZROBERTORIBEIROGomberg" target="_blank">Nosso Canal do YouTube</a>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Gomberg&Associados. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        // Função para exibir conteúdo dinâmico
+        function showContent(section) {
+            const content = {
+                about: `
+                    <h2>Sobre Nós</h2>
+                    <p>O escritório Gomberg&Associados tem uma longa história de sucesso na advocacia...</p>
+                `,
+                services: `
+                    <h2>Áreas de Atuação</h2>
+                    <ul>
+                        <li>Direito Civil</li>
+                        <li>Direito Trabalhista</li>
+                        <li>Direito Empresarial</li>
+                    </ul>
+                `,
+                team: `
+                    <h2>Nossa Equipe</h2>
+                    <div>
+                        <h3>Drº. Luiz Roberto Ribeiro Gomberg</h3>
+                        <p>OAB/SP - 477.614</p>
+                    </div>
+                `,
+                consult: `
+                    <h2>Agende uma Consulta</h2>
+                    <p>Entre em contato para agendar sua consulta através de nossos canais:</p>
+                    <p>Email: <a href="mailto:gombergeassociados@gmail.com">gombergeassociados@gmail.com</a></p>
+                    <p>WhatsApp: <a href="https://wa.me/5511973383818" target="_blank">(11) 9.7338-3818</a></p>
+                `
+            };
+
+            const dynamicContent = document.getElementById('dynamic-content');
+            dynamicContent.innerHTML = content[section] || '<p>Seção não encontrada.</p>';
+            addBackButton();
+        }
+
+        // Função para exibir contatos
+        function showContact() {
+            const dynamicContent = document.getElementById('dynamic-content');
+            dynamicContent.innerHTML = `
+                <h2>Nossos Contatos</h2>
+                <p>WhatsApp: <a href="https://wa.me/5511973383818" target="_blank">(11) 9.7338-3818</a></p>
+                <p>Email: <a href="mailto:gombergeassociados@gmail.com">gombergeassociados@gmail.com</a></p>
+            `;
+            addBackButton();
+        }
+
+        // Função para exibir login da área administrativa
+        function showAdminLogin() {
+            const dynamicContent = document.getElementById('dynamic-content');
+            dynamicContent.innerHTML = `
+                <div style="text-align: center;">
+                    <h2>Área Administrativa</h2>
+                    <input type="text" id="admin-login" placeholder="Login" style="padding: 10px; width: 80%; margin-bottom: 10px;"><br>
+                    <input type="password" id="admin-password" placeholder="Senha" style="padding: 10px; width: 80%; margin-bottom: 10px;"><br>
+                    <button onclick="authenticateAdmin()" style="padding: 10px 20px;">Entrar</button>
+                    <button onclick="goBack()" style="padding: 10px 20px;">Voltar</button>
+                </div>
+            `;
+        }
+
+        // Função para autenticação
+        function authenticateAdmin() {
+            const login = document.getElementById('admin-login').value;
+            const password = document.getElementById('admin-password').value;
+
+            if (login === '08457245848' && password === 'Regina12@2024') {
+                showAdminPanel();
+            } else {
+                alert('Login ou senha incorretos!');
+            }
+        }
+
+        // Função para exibir painel administrativo
+        function showAdminPanel() {
+            const dynamicContent = document.getElementById('dynamic-content');
+            dynamicContent.innerHTML = `
+                <div style="text-align: center;">
+                    <h2>Painel Administrativo</h2>
+                    <textarea id="note-content" placeholder="Escreva sua nota aqui..." style="width: 80%; height: 100px; margin-bottom: 10px;"></textarea><br>
+                    <button onclick="saveNote()" style="padding: 10px 20px;">Salvar Nota</button>
+                    <button onclick="viewNotes()" style="padding: 10px 20px;">Visualizar Notas</button>
+                    <button onclick="logoutAdmin()" style="padding: 10px 20px;">Sair</button>
+                </div>
+                <div id="notes-display" style="margin-top: 20px;"></div>
+            `;
+        }
+
+        // Função para adicionar botão "Voltar"
+        function addBackButton() {
+            const dynamicContent = document.getElementById('dynamic-content');
+            dynamicContent.innerHTML += `<button onclick="goBack()" style="padding: 10px 20px; margin-top: 20px;">Voltar</button>`;
+        }
+
+        // Função para salvar nota
+        function saveNote() {
+            const noteContent = document.getElementById('note-content').value;
+            if (noteContent.trim()) {
+                const noteKey = `note-${Date.now()}`;
+                localStorage.setItem(noteKey, noteContent);
+                alert('Nota salva com sucesso!');
+                document.getElementById('note-content').value = '';
+            } else {
+                alert('O campo de nota está vazio.');
+            }
+        }
+
+        // Função para visualizar notas
+        function viewNotes() {
+            const notesDisplay = document.getElementById('notes-display');
+            notesDisplay.innerHTML = '<h3>Notas Salvas:</h3>';
+            Object.keys(localStorage).forEach(key => {
+                if (key.startsWith('note-')) {
+                    notesDisplay.innerHTML += `
+                        <div style="margin-bottom: 10px; padding: 10px; border: 1px solid #ccc;">
+                            <p>${localStorage.getItem(key)}</p>
+                            <button onclick="deleteNote('${key}')" style="padding: 5px 10px;">Excluir</button>
+                        </div>
+                    `;
+                }
+            });
+        }
+
+        // Função para excluir nota
+        function deleteNote(key) {
+            localStorage.removeItem(key);
+            alert('Nota excluída com sucesso!');
+            viewNotes();
+        }
+
+        // Função para deslogar
+        function logoutAdmin() {
+            showAdminLogin();
+        }
+
+        // Função para voltar para a página inicial
+        function goBack() {
+            const dynamicContent = document.getElementById('dynamic-content');
+            dynamicContent.innerHTML = '';
+        }
+    </script>
 </body>
 </html>
