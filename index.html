@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gomberg&Associados - Advogados Associados</title>
     <style>
-        /* Fundo dourado */
-        body {
+        /* Estilos CSS (o mesmo do código anterior) */
+         body {
             margin: 0;
             font-family: Arial, sans-serif;
             background-color: #FFD700;
@@ -62,9 +62,9 @@
             max-width: 800px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-		#dynamic-content h2 {
-			margin-bottom: 15px;
-		}
+        #dynamic-content h2 {
+            margin-bottom: 15px;
+        }
          #welcome-message {
             text-align: center;
             background-color: #fff;
@@ -79,6 +79,95 @@
             color: #222;/* Darker color for main text */
              padding: 5px;/* Reduced padding to minimize height */
              margin: 0; /*remove all margin */
+        }
+        /* Área Administrativa */
+        .admin-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        .admin-button {
+            background-color: #000;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            cursor: pointer;
+        }
+        .admin-button:hover {
+            background-color: #FFC107;
+            color: #000;
+        }
+
+        /* Form de login */
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .login-form input {
+            margin: 5px 0;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .client-form input, .client-form textarea, .fees-form input, .fees-form select  {
+            margin: 5px 0;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            display: block;
+        }
+        .client-list, .fees-list{
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .client-list th, .client-list td, .fees-list th, .fees-list td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+        .client-list th, .fees-list th{
+            background-color: #f2f2f2;
+        }
+         .client-list .action-buttons button, .fees-list .action-buttons button {
+            background-color: #000;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin-right: 5px;
+            cursor: pointer;
+            }
+         .client-list .action-buttons button:hover, .fees-list .action-buttons button:hover {
+            background-color: #FFC107;
+            color: #000;
+        }
+         .client-form {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+             margin: 20px auto;
+            max-width: 800px;
+        }
+         .process-list{
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .process-list th, .process-list td{
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+         .process-list th{
+            background-color: #f2f2f2;
         }
 
         /* Redes sociais */
@@ -110,6 +199,16 @@
             text-align: center;
             padding: 10px 0;
             margin-top: 20px;
+        }
+        .process-form, .fees-form {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+             margin: 20px auto;
+            max-width: 800px;
         }
     </style>
 </head>
@@ -153,8 +252,7 @@
     </footer>
 
     <script>
-    
-        // Função para exibir conteúdo dinâmico
+    // Função para exibir conteúdo dinâmico
         function showContent(section) {
             const content = {
                 about: `
@@ -195,12 +293,21 @@
         }
 
          function goBack() {
-            const dynamicContent = document.getElementById('dynamic-content');
-            dynamicContent.innerHTML = '';
+             const dynamicContent = document.getElementById('dynamic-content');
+             dynamicContent.innerHTML = '';
+             const loginForm = document.getElementById('loginForm');
+                if (loginForm) {
+                 loginForm.removeEventListener('submit',  authenticateAdmin);
+               }
             //mostra a mensagem de boas vindas quando retorna para a página inicial
              const welcomeMessage = document.getElementById('welcome-message');
               if(welcomeMessage){
                 welcomeMessage.style.display = 'block';
+            }
+            //remover o formulário caso ele exista
+             const loginFormElement = document.querySelector('#dynamic-content .login-form');
+            if (loginFormElement) {
+                loginFormElement.remove();
             }
 
         }
@@ -209,7 +316,7 @@
              dynamicContent.innerHTML = `
                 <div class="admin-container">
                     <h2>Área Administrativa</h2>
-                    <button onclick="authenticateAdmin()" class="admin-button">Entrar</button>
+                    <button onclick="showLoginForm()" class="admin-button">Entrar</button>
                     <button onclick="goBack()" class="admin-button">Voltar</button>
                 </div>
             `;
@@ -234,11 +341,1057 @@
                 welcomeMessage.style.display = 'none';
             }
         }
-  function authenticateAdmin() {};
-       function addBackButton() {
+        function showLoginForm(){
             const dynamicContent = document.getElementById('dynamic-content');
-            dynamicContent.innerHTML += `<button onclick="goBack()" style="padding: 10px 20px; margin-top: 20px;">Voltar</button>`;
+            dynamicContent.innerHTML = `
+             <div class="admin-container">
+                <h2>Login Administrativo</h2>
+                <form class="login-form" id="loginForm">
+                   <input type="text" id="username" placeholder="Usuário" required/>
+                   <input type="password" id="password" placeholder="Senha" required/>
+                    <button type="submit" class="admin-button">Confirmar</button>
+                    <button onclick="goBack()" class="admin-button">Voltar</button>
+                </form>
+              </div>
+             `;
+          const loginForm = document.getElementById('loginForm');
+            loginForm.addEventListener('submit', function(event) {
+              event.preventDefault();
+               authenticateAdmin();
+             });
+                // Remove o texto da página principal ao navegar para outra seção
+                 const welcomeMessage = document.getElementById('welcome-message');
+            if(welcomeMessage){
+                welcomeMessage.style.display = 'none';
+            }
+       }
+     const adminCredentials = {
+            username: '08457245848',
+            password: 'Regina12@2024'
+    }
+       let clients = [];
+        let processes = [];
+         let fees = [];
+        let successFees = [];
+    function authenticateAdmin() {
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const username = usernameInput.value;
+        const password = passwordInput.value;
+
+        if (username === adminCredentials.username && password === adminCredentials.password) {
+            showClientDashboard();
+
+        } else {
+             alert('Credenciais inválidas. Tente novamente.');
+              usernameInput.value = '';
+             passwordInput.value = '';
         }
+    }
+
+  function showClientDashboard() {
+        const dynamicContent = document.getElementById('dynamic-content');
+        dynamicContent.innerHTML = `
+            <div class="admin-container">
+                <div class="logo" style="display: flex; justify-content: center; align-items:center;">
+                    <img src="meulogo.png" alt="Gomberg&Associados Logo" style="max-width: 150px; margin: 10px;"/>
+                     <h2 style="margin: 10px;">Área de Clientes</h2>
+                 </div>
+                <button class="admin-button" onclick="showAddClientForm()">Cadastrar Cliente</button>
+                <button class="admin-button" onclick="showClientList()">Listar Clientes</button>
+                 <button onclick="showReports()" class="admin-button">Relatórios</button>
+                  <button onclick="goBack()" class="admin-button">Voltar</button>
+            </div>
+        `;
+
+       const welcomeMessage = document.getElementById('welcome-message');
+        if(welcomeMessage){
+            welcomeMessage.style.display = 'none';
+            }
+    }
+
+       function showAddClientForm(){
+        const dynamicContent = document.getElementById('dynamic-content');
+            dynamicContent.innerHTML = `
+            <form class="client-form" id="addClientForm">
+                <h2>Cadastrar Cliente</h2>
+                <input type="text" id="clientName" placeholder="Nome" required>
+                <input type="text" id="clientRg" placeholder="RG" required>
+                <input type="text" id="clientCpf" placeholder="CPF" required>
+                <input type="tel" id="clientPhone" placeholder="Telefone" required>
+                <input type="email" id="clientEmail" placeholder="Email" required>
+                <input type="text" id="clientAddress" placeholder="Endereço" required>
+                <textarea id="clientNotes" placeholder="Histórico do Caso" rows="5"></textarea>
+                <button type="submit" class="admin-button">Cadastrar</button>
+                <button onclick="showClientDashboard()" class="admin-button">Voltar</button>
+             </form>
+             `;
+              const addClientForm = document.getElementById('addClientForm');
+                addClientForm.addEventListener('submit', function(event){
+                   event.preventDefault();
+                    addClient();
+                 });
+       const welcomeMessage = document.getElementById('welcome-message');
+        if(welcomeMessage){
+            welcomeMessage.style.display = 'none';
+            }
+    }
+
+function addClient() {
+    const name = document.getElementById('clientName').value;
+    const rg = document.getElementById('clientRg').value;
+    const cpf = document.getElementById('clientCpf').value;
+    const phone = document.getElementById('clientPhone').value;
+    const email = document.getElementById('clientEmail').value;
+    const address = document.getElementById('clientAddress').value;
+    const notes = document.getElementById('clientNotes').value;
+
+    const newClient = {
+        id: Date.now(),
+        name: name,
+        rg: rg,
+        cpf: cpf,
+        phone: phone,
+        email: email,
+        address: address,
+        notes: notes
+    };
+
+    clients.push(newClient);
+    showClientDashboard();
+}
+ function showClientList() {
+    const dynamicContent = document.getElementById('dynamic-content');
+    let tableRows = clients.map(client => `
+          <tr>
+            <td>${client.name}</td>
+            <td>${client.rg}</td>
+            <td>${client.cpf}</td>
+            <td>${client.phone}</td>
+            <td>${client.email}</td>
+            <td>${client.address}</td>
+            <td class="action-buttons">
+                 <button onclick="showEditClientForm(${client.id})">Editar</button>
+                <button onclick="deleteClient(${client.id})">Excluir</button>
+                 <button onclick="showClientDetails(${client.id})">Visualizar</button>
+                 <button onclick="showProcessDashboard(${client.id})">Processos</button>
+                 <button onclick="showFeesDashboard(${client.id})">Honorários</button>
+            </td>
+           </tr>
+      `).join('');
+      dynamicContent.innerHTML = `
+        <h2>Lista de Clientes</h2>
+        <table class="client-list">
+           <thead>
+            <tr>
+                <th>Nome</th>
+                <th>RG</th>
+                <th>CPF</th>
+                <th>Telefone</th>
+                <th>Email</th>
+                <th>Endereço</th>
+                <th>Ações</th>
+            </tr>
+            </thead>
+        <tbody>
+            ${tableRows}
+        </tbody>
+       </table>
+        <button onclick="showClientDashboard()" class="admin-button">Voltar</button>
+      `;
+
+     const welcomeMessage = document.getElementById('welcome-message');
+        if(welcomeMessage){
+            welcomeMessage.style.display = 'none';
+            }
+}
+    function showEditClientForm(clientId) {
+        const client = clients.find(client => client.id === clientId);
+
+        const dynamicContent = document.getElementById('dynamic-content');
+          dynamicContent.innerHTML = `
+           <form class="client-form" id="editClientForm">
+                <h2>Editar Cliente</h2>
+                <input type="hidden" id="clientId" value="${client.id}">
+                <input type="text" id="clientName" placeholder="Nome" value="${client.name}" required>
+                <input type="text" id="clientRg" placeholder="RG" value="${client.rg}" required>
+                <input type="text" id="clientCpf" placeholder="CPF" value="${client.cpf}" required>
+                <input type="tel" id="clientPhone" placeholder="Telefone" value="${client.phone}" required>
+                <input type="email" id="clientEmail" placeholder="Email" value="${client.email}" required>
+                <input type="text" id="clientAddress" placeholder="Endereço" value="${client.address}" required>
+                <textarea id="clientNotes" placeholder="Histórico do Caso" rows="5">${client.notes}</textarea>
+                 <button type="submit" class="admin-button">Salvar</button>
+                <button onclick="showClientList()" class="admin-button">Voltar</button>
+             </form>
+             `;
+            const editClientForm = document.getElementById('editClientForm');
+            editClientForm.addEventListener('submit', function(event){
+                 event.preventDefault();
+                 editClient(clientId);
+             });
+       const welcomeMessage = document.getElementById('welcome-message');
+        if(welcomeMessage){
+            welcomeMessage.style.display = 'none';
+            }
+    }
+    function editClient(clientId){
+        const clientIndex = clients.findIndex(client => client.id === clientId);
+        if(clientIndex !== -1){
+             const name = document.getElementById('clientName').value;
+            const rg = document.getElementById('clientRg').value;
+            const cpf = document.getElementById('clientCpf').value;
+            const phone = document.getElementById('clientPhone').value;
+            const email = document.getElementById('clientEmail').value;
+            const address = document.getElementById('clientAddress').value;
+            const notes = document.getElementById('clientNotes').value;
+        clients[clientIndex] = {
+            id: clientId,
+             name: name,
+            rg: rg,
+            cpf: cpf,
+             phone: phone,
+             email: email,
+            address: address,
+            notes: notes
+         };
+           showClientList();
+        }
+    }
+    function deleteClient(clientId){
+        clients = clients.filter(client => client.id !== clientId);
+          showClientList();
+    }
+      function showClientDetails(clientId) {
+        const client = clients.find(client => client.id === clientId);
+       const dynamicContent = document.getElementById('dynamic-content');
+        dynamicContent.innerHTML = `
+                <h2>Detalhes do Cliente</h2>
+                <p><strong>Nome:</strong> ${client.name}</p>
+                <p><strong>RG:</strong> ${client.rg}</p>
+                <p><strong>CPF:</strong> ${client.cpf}</p>
+                <p><strong>Telefone:</strong> ${client.phone}</p>
+                <p><strong>Email:</strong> ${client.email}</p>
+                <p><strong>Endereço:</strong> ${client.address}</p>
+                <p><strong>Histórico do Caso:</strong></p>
+                <p style="white-space: pre-line;">${client.notes}</p>
+                <button onclick="showClientList()" class="admin-button">Voltar</button>
+            `;
+             const welcomeMessage = document.getElementById('welcome-message');
+        if(welcomeMessage){
+            welcomeMessage.style.display = 'none';
+            }
+    }
+    // Processos
+  function showProcessDashboard(clientId) {
+      const client = clients.find(client => client.id === clientId);
+    const dynamicContent = document.getElementById('dynamic-content');
+         dynamicContent.innerHTML = `
+           <div class="admin-container">
+               <h2>Processos do Cliente: ${client.name}</h2>
+            <button class="admin-button" onclick="showAddProcessForm(${clientId})">Adicionar Processo</button>
+            <button class="admin-button" onclick="showProcessList(${clientId})">Listar Processos</button>
+            <button onclick="showClientList()" class="admin-button">Voltar</button>
+            </div>
+         `;
+         const welcomeMessage = document.getElementById('welcome-message');
+         if(welcomeMessage){
+                welcomeMessage.style.display = 'none';
+        }
+  }
+
+      function showAddProcessForm(clientId){
+            const client = clients.find(client => client.id === clientId);
+            const dynamicContent = document.getElementById('dynamic-content');
+            dynamicContent.innerHTML = `
+                <form class="process-form" id="addProcessForm">
+                    <h2>Adicionar Processo para: ${client.name}</h2>
+                     <input type="hidden" id="processClientId" value="${clientId}">
+                     <input type="text" id="processNumber" placeholder="Número do Processo" required>
+                     <input type="text" id="processName" placeholder="Nome"  value="${client.name}" readonly>
+                      <input type="text" id="processRg" placeholder="RG"  value="${client.rg}" readonly>
+                       <input type="text" id="processCpf" placeholder="CPF"  value="${client.cpf}" readonly>
+                     <input type="text" id="processForum" placeholder="Fórum" required>
+                     <input type="text" id="processVara" placeholder="Vara" required>
+                      <input type="text" id="processJudge" placeholder="Juiz" required>
+                     <input type="text" id="processDefendant" placeholder="Réu" required>
+                    <textarea id="processHistory" placeholder="Histórico do Status" rows="5"></textarea>
+                     <button type="submit" class="admin-button">Adicionar</button>
+                     <button onclick="showProcessDashboard(${clientId})" class="admin-button">Voltar</button>
+             </form>
+             `;
+         const addProcessForm = document.getElementById('addProcessForm');
+         addProcessForm.addEventListener('submit', function(event){
+                event.preventDefault();
+                addProcess();
+          });
+          const welcomeMessage = document.getElementById('welcome-message');
+            if(welcomeMessage){
+                welcomeMessage.style.display = 'none';
+             }
+      }
+      function addProcess(){
+          const clientId = parseInt(document.getElementById('processClientId').value);
+          const processNumber = document.getElementById('processNumber').value;
+          const processName = document.getElementById('processName').value;
+          const processRg = document.getElementById('processRg').value;
+          const processCpf = document.getElementById('processCpf').value;
+          const processForum = document.getElementById('processForum').value;
+          const processVara = document.getElementById('processVara').value;
+          const processJudge = document.getElementById('processJudge').value;
+          const processDefendant = document.getElementById('processDefendant').value;
+          const processHistory = document.getElementById('processHistory').value;
+
+           const newProcess = {
+               id: Date.now(),
+               clientId: clientId,
+               processNumber: processNumber,
+                processName: processName,
+                processRg: processRg,
+                 processCpf: processCpf,
+               processForum: processForum,
+               processVara: processVara,
+               processJudge: processJudge,
+                processDefendant: processDefendant,
+                processHistory: processHistory
+           }
+          processes.push(newProcess);
+          showProcessDashboard(clientId);
+      }
+  function showProcessList(clientId){
+        const client = clients.find(client => client.id === clientId);
+        const clientProcesses = processes.filter(process => process.clientId === clientId);
+         const dynamicContent = document.getElementById('dynamic-content');
+         let tableRows = clientProcesses.map(process => `
+            <tr>
+               <td>${process.processNumber}</td>
+               <td>${process.processForum}</td>
+               <td>${process.processVara}</td>
+               <td>${process.processJudge}</td>
+               <td>${process.processDefendant}</td>
+               <td class="action-buttons">
+                  <button onclick="showEditProcessForm(${process.id})">Editar</button>
+                  <button onclick="deleteProcess(${process.id})">Excluir</button>
+                  <button onclick="showProcessDetails(${process.id})">Visualizar</button>
+              </td>
+            </tr>
+         `).join('');
+         dynamicContent.innerHTML = `
+             <h2>Lista de Processos para: ${client.name}</h2>
+              <table class="process-list">
+              <thead>
+                <tr>
+                   <th>Número do Processo</th>
+                   <th>Fórum</th>
+                   <th>Vara</th>
+                   <th>Juiz</th>
+                  <th>Réu</th>
+                  <th>Ações</th>
+               </tr>
+               </thead>
+             <tbody>
+              ${tableRows}
+              </tbody>
+            </table>
+              <button onclick="showProcessDashboard(${clientId})" class="admin-button">Voltar</button>
+           `;
+            const welcomeMessage = document.getElementById('welcome-message');
+             if(welcomeMessage){
+                welcomeMessage.style.display = 'none';
+               }
+  }
+      function showEditProcessForm(processId) {
+        const process = processes.find(process => process.id === processId);
+        const dynamicContent = document.getElementById('dynamic-content');
+          dynamicContent.innerHTML = `
+           <form class="process-form" id="editProcessForm">
+               <h2>Editar Processo</h2>
+               <input type="hidden" id="processId" value="${process.id}">
+              <input type="hidden" id="processClientId" value="${process.clientId}">
+                 <input type="text" id="processNumber" placeholder="Número do Processo" value="${process.processNumber}" required>
+                <input type="text" id="processName" placeholder="Nome"  value="${process.processName}" readonly>
+                      <input type="text" id="processRg" placeholder="RG"  value="${process.processRg}" readonly>
+                       <input type="text" id="processCpf" placeholder="CPF"  value="${process.processCpf}" readonly>
+                <input type="text" id="processForum" placeholder="Fórum"  value="${process.processForum}" required>
+                 <input type="text" id="processVara" placeholder="Vara" value="${process.processVara}" required>
+                 <input type="text" id="processJudge" placeholder="Juiz"  value="${process.processJudge}" required>
+                <input type="text" id="processDefendant" placeholder="Réu" value="${process.processDefendant}" required>
+                <textarea id="processHistory" placeholder="Histórico do Status" rows="5">${process.processHistory}</textarea>
+                <button type="submit" class="admin-button">Salvar</button>
+                 <button onclick="showProcessList(${process.clientId})" class="admin-button">Voltar</button>
+             </form>
+             `;
+            const editProcessForm = document.getElementById('editProcessForm');
+             editProcessForm.addEventListener('submit', function(event){
+                event.preventDefault();
+                editProcess(processId);
+          });
+       const welcomeMessage = document.getElementById('welcome-message');
+        if(welcomeMessage){
+            welcomeMessage.style.display = 'none';
+            }
+    }
+     function editProcess(processId){
+        const processIndex = processes.findIndex(process => process.id === processId);
+        if(processIndex !== -1){
+             const clientId = parseInt(document.getElementById('processClientId').value);
+            const processNumber = document.getElementById('processNumber').value;
+           const processForum = document.getElementById('processForum').value;
+           const processVara = document.getElementById('processVara').value;
+           const processJudge = document.getElementById('processJudge').value;
+            const processDefendant = document.getElementById('processDefendant').value;
+             const processHistory = document.getElementById('processHistory').value;
+        processes[processIndex] = {
+            id: processId,
+            clientId: clientId,
+             processNumber: processNumber,
+               processForum: processForum,
+               processVara: processVara,
+               processJudge: processJudge,
+                processDefendant: processDefendant,
+                processHistory: processHistory
+         };
+           showProcessList(clientId);
+        }
+    }
+      function deleteProcess(processId){
+        const process = processes.find(process => process.id === processId);
+        processes = processes.filter(process => process.id !== processId);
+        showProcessList(process.clientId);
+    }
+
+       function showProcessDetails(processId) {
+        const process = processes.find(process => process.id === processId);
+        const dynamicContent = document.getElementById('dynamic-content');
+        dynamicContent.innerHTML = `
+                <h2>Detalhes do Processo</h2>
+                <p><strong>Número do Processo:</strong> ${process.processNumber}</p>
+                  <p><strong>Nome:</strong> ${process.processName}</p>
+                    <p><strong>RG:</strong> ${process.processRg}</p>
+                    <p><strong>CPF:</strong> ${process.processCpf}</p>
+                <p><strong>Fórum:</strong> ${process.processForum}</p>
+                <p><strong>Vara:</strong> ${process.processVara}</p>
+                <p><strong>Juiz:</strong> ${process.processJudge}</p>
+                <p><strong>Réu:</strong> ${process.processDefendant}</p>
+                <p><strong>Histórico do Status:</strong></p>
+                <p style="white-space: pre-line;">${process.processHistory}</p>
+                <button onclick="showProcessList(${process.clientId})" class="admin-button">Voltar</button>
+            `;
+             const welcomeMessage = document.getElementById('welcome-message');
+        if(welcomeMessage){
+            welcomeMessage.style.display = 'none';
+            }
+    }
+      //Fees
+      function
+ showFeesDashboard(clientId){
+        const client = clients.find(client => client.id === clientId);
+            const dynamicContent = document.getElementById('dynamic-content');
+            dynamicContent.innerHTML = `
+              <div class="admin-container">
+                <h2>Honorários do Cliente: ${client.name}</h2>
+                <button class="admin-button" onclick="showAddFeesForm(${clientId})">Adicionar Honorários</button>
+                <button class="admin-button" onclick="showFeesList(${clientId})">Listar Honorários</button>
+                  <button class="admin-button" onclick="showSuccessFeesForm(${clientId})">Honorários pelo Êxito</button>
+                 <button onclick="showClientList()" class="admin-button">Voltar</button>
+              </div>
+            `;
+           const welcomeMessage = document.getElementById('welcome-message');
+            if(welcomeMessage){
+                welcomeMessage.style.display = 'none';
+            }
+
+      }
+      function showSuccessFeesForm(clientId){
+        const client = clients.find(client => client.id === clientId);
+       const dynamicContent = document.getElementById('dynamic-content');
+        dynamicContent.innerHTML = `
+         <form class="fees-form" id="addSuccessFeesForm">
+            <h2>Honorários pelo Êxito para: ${client.name}</h2>
+            <input type="hidden" id="successFeesClientId" value="${clientId}">
+             <input type="text" id="successFeesName" placeholder="Nome do Cliente" value="${client.name}" readonly>
+             <input type="text" id="successFeesRg" placeholder="RG do Cliente" value="${client.rg}" readonly>
+              <input type="text" id="successFeesCpf" placeholder="CPF do Cliente" value="${client.cpf}" readonly>
+               <input type="number" id="successFeesPercentage" placeholder="Porcentagem" required>
+              <button type="submit" class="admin-button">Adicionar</button>
+               <button onclick="showFeesDashboard(${clientId})" class="admin-button">Voltar</button>
+         </form>
+        `;
+         const addSuccessFeesForm = document.getElementById('addSuccessFeesForm');
+          addSuccessFeesForm.addEventListener('submit', function(event){
+             event.preventDefault();
+                addSuccessFees();
+            });
+         const welcomeMessage = document.getElementById('welcome-message');
+            if(welcomeMessage){
+                welcomeMessage.style.display = 'none';
+            }
+     }
+    function addSuccessFees(){
+       const clientId = parseInt(document.getElementById('successFeesClientId').value);
+       const successFeesName = document.getElementById('successFeesName').value;
+      const successFeesRg = document.getElementById('successFeesRg').value;
+      const successFeesCpf = document.getElementById('successFeesCpf').value;
+        const successFeesPercentage = document.getElementById('successFeesPercentage').value;
+
+         const newSuccessFee = {
+             id: Date.now(),
+             clientId: clientId,
+              successFeesName: successFeesName,
+               successFeesRg: successFeesRg,
+                successFeesCpf: successFeesCpf,
+              percentage: successFeesPercentage
+        };
+      successFees.push(newSuccessFee);
+         showFeesDashboard(clientId);
+   }
+        function showAddFeesForm(clientId) {
+          const client = clients.find(client => client.id === clientId);
+        const dynamicContent = document.getElementById('dynamic-content');
+        dynamicContent.innerHTML = `
+         <form class="fees-form" id="addFeesForm">
+            <h2>Adicionar Honorários para: ${client.name}</h2>
+            <input type="hidden" id="feesClientId" value="${clientId}">
+             <input type="text" id="feesName" placeholder="Nome do Cliente" value="${client.name}" readonly>
+             <input type="text" id="feesRg" placeholder="RG do Cliente" value="${client.rg}" readonly>
+              <input type="text" id="feesCpf" placeholder="CPF do Cliente" value="${client.cpf}" readonly>
+               <input type="date" id="feesContractDate" placeholder="Data do Contrato" required>
+            <input type="number" id="feesValue" placeholder="Valor" required>
+             <input type="date" id="feesDate" placeholder="Data" required>
+            <select id="feesPaymentMethod" onchange="showInstallments(this.value)" required>
+                  <option value="">Forma de Pagamento</option>
+                  <option value="dinheiro">Dinheiro</option>
+                  <option value="pix">PIX</option>
+                  <option value="cartao">Cartão</option>
+                    <option value="cheque">Cheque</option>
+                  <option value="parcelado">Parcelado</option>
+              </select>
+            <div id="installment-fields" style="display:none;">
+                <label for="installmentCount">Número de Parcelas:</label>
+                <select id="installmentCount" onchange="generateInstallmentDates()">
+                    <option value="">Selecione</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                     <option value="6">6</option>
+                  </select>
+                <div id="installment-dates"></div>
+            </div>
+            <button type="submit" class="admin-button">Adicionar</button>
+             <button onclick="showFeesDashboard(${clientId})" class="admin-button">Voltar</button>
+         </form>
+        `;
+       const addFeesForm = document.getElementById('addFeesForm');
+         addFeesForm.addEventListener('submit', function(event){
+                event.preventDefault();
+                addFees();
+        });
+         const welcomeMessage = document.getElementById('welcome-message');
+            if(welcomeMessage){
+                welcomeMessage.style.display = 'none';
+            }
+    }
+     function showInstallments(paymentMethod){
+         const installmentFields = document.getElementById('installment-fields');
+        if(paymentMethod === 'parcelado'){
+              installmentFields.style.display = 'block';
+        }else{
+            installmentFields.style.display = 'none';
+        }
+    }
+       function generateInstallmentDates() {
+        const installmentCount = document.getElementById('installmentCount').value;
+         const installmentDatesDiv = document.getElementById('installment-dates');
+        installmentDatesDiv.innerHTML = ''; // Limpar campos existentes
+
+         for (let i = 1; i <= installmentCount; i++) {
+             const label = document.createElement('label');
+            label.textContent = `Data de Vencimento da Parcela ${i}:`;
+             const input = document.createElement('input');
+             input.type = 'date';
+            input.id = `installmentDate${i}`;
+             input.required = true;
+             installmentDatesDiv.appendChild(label);
+             installmentDatesDiv.appendChild(input);
+          }
+       }
+     function addFees(){
+        const clientId = parseInt(document.getElementById('feesClientId').value);
+        const feesName = document.getElementById('feesName').value;
+        const feesRg = document.getElementById('feesRg').value;
+         const feesCpf = document.getElementById('feesCpf').value;
+        const feesContractDate = document.getElementById('feesContractDate').value;
+        const feesValue = document.getElementById('feesValue').value;
+        const feesDate = document.getElementById('feesDate').value;
+        const feesPaymentMethod = document.getElementById('feesPaymentMethod').value;
+        let installments = [];
+
+      if(feesPaymentMethod === 'parcelado'){
+           const installmentCount = document.getElementById('installmentCount').value;
+            for (let i = 1; i <= installmentCount; i++) {
+                const date = document.getElementById(`installmentDate${i}`).value;
+                installments.push({date: date, paid: false});
+           }
+      }
+
+        const newFees = {
+            id: Date.now(),
+            clientId: clientId,
+             feesName: feesName,
+            feesRg: feesRg,
+             feesCpf: feesCpf,
+            contractDate: feesContractDate,
+             value: feesValue,
+            date: feesDate,
+            paymentMethod: feesPaymentMethod,
+            installments: installments
+         };
+         fees.push(newFees);
+         showFeesDashboard(clientId);
+    }
+     function showFeesList(clientId){
+         const client = clients.find(client => client.id === clientId);
+         const clientFees = fees.filter(fee => fee.clientId === clientId);
+        const dynamicContent = document.getElementById('dynamic-content');
+        let tableRows = clientFees.map(fee => {
+            let paymentDetails = '';
+            if (fee.paymentMethod === 'parcelado' && fee.installments) {
+                paymentDetails = fee.installments.map((installment, index) => `
+                    <p>
+                        Parcela ${index + 1}: Vencimento ${installment.date}, 
+                       ${installment.paid ? 'Paga' : 'Pendente'}
+                      <button onclick="markInstallmentPaid(${fee.id}, ${index})">Marcar como Paga</button>
+                   </p>
+               `).join('');
+          } else {
+             paymentDetails = `Forma de Pagamento: ${fee.paymentMethod}`;
+            }
+              return `
+                <tr>
+                    <td>${fee.value}</td>
+                    <td>${fee.contractDate}</td>
+                    <td>${fee.date}</td>
+                     <td>${paymentDetails}</td>
+                     <td class="action-buttons">
+                     <button onclick="showEditFeesForm(${fee.id})">Editar</button>
+                      <button onclick="deleteFees(${fee.id})">Excluir</button>
+                     <button onclick="showFeesDetails(${fee.id})">Visualizar</button>
+                 </td>
+               </tr>
+              `;
+         }).join('');
+         dynamicContent.innerHTML = `
+            <h2>Lista de Honorários para: ${client.name}</h2>
+            <table class="fees-list">
+              <thead>
+               <tr>
+                   <th>Valor</th>
+                    <th>Data do Contrato</th>
+                    <th>Data</th>
+                    <th>Forma de Pagamento</th>
+                   <th>Ações</th>
+                </tr>
+               </thead>
+             <tbody>
+               ${tableRows}
+             </tbody>
+            </table>
+            <button onclick="showFeesDashboard(${clientId})" class="admin-button">Voltar</button>
+         `;
+          const welcomeMessage = document.getElementById('welcome-message');
+            if(welcomeMessage){
+                welcomeMessage.style.display = 'none';
+            }
+    }
+    function markInstallmentPaid(feeId, installmentIndex) {
+        const fee = fees.find(fee => fee.id === feeId);
+       if (fee && fee.installments && fee.installments[installmentIndex]) {
+            fee.installments[installmentIndex].paid = true;
+           showFeesList(fee.clientId);
+        }
+    }
+   function showEditFeesForm(feeId){
+       const fee = fees.find(fee => fee.id === feeId);
+       const dynamicContent = document.getElementById('dynamic-content');
+        dynamicContent.innerHTML = `
+             <form class="fees-form" id="editFeesForm">
+                 <h2>Editar Honorários</h2>
+                  <input type="hidden" id="feesId" value="${fee.id}">
+                   <input type="hidden" id="feesClientId" value="${fee.clientId}">
+                    <input type="text" id="feesName" placeholder="Nome do Cliente" value="${fee.feesName}" readonly>
+                     <input type="text" id="feesRg" placeholder="RG do Cliente" value="${fee.feesRg}" readonly>
+                      <input type="text" id="feesCpf" placeholder="CPF do Cliente" value="${fee.feesCpf}" readonly>
+                      <input type="date" id="feesContractDate" placeholder="Data do Contrato" value="${fee.contractDate}" required>
+                  <input type="number" id="feesValue" placeholder="Valor" value="${fee.value}" required>
+                 <input type="date" id="feesDate" placeholder="Data" value="${fee.date}" required>
+                   <select id="feesPaymentMethod" onchange="showInstallmentsEdit(this.value)" required>
+                      <option value="dinheiro" ${fee.paymentMethod === 'dinheiro' ? 'selected' : ''}>Dinheiro</option>
+                      <option value="pix" ${fee.paymentMethod === 'pix' ? 'selected' : ''}>PIX</option>
+                      <option value="cartao" ${fee.paymentMethod === 'cartao' ? 'selected' : ''}>Cartão</option>
+                     <option value="cheque" ${fee.paymentMethod === 'cheque' ? 'selected' : ''}>Cheque</option>
+                    <option value="parcelado" ${fee.paymentMethod === 'parcelado' ? 'selected' : ''}>Parcelado</option>
+                </select>
+               <div id="installment-fields-edit" style="display: ${fee.paymentMethod === 'parcelado' ? 'block' : 'none'};">
+                    <label for="installmentCountEdit">Número de Parcelas:</label>
+                    <select id="installmentCountEdit" onchange="generateInstallmentDatesEdit()">
+                         <option value="">Selecione</option>
+                        <option value="1" ${fee.installments?.length === 1 ? 'selected':''}>1</option>
+                        <option value="2" ${fee.installments?.length === 2 ? 'selected':''}>2</option>
+                        <option value="3" ${fee.installments?.length === 3 ? 'selected':''}>3</option>
+                        <option value="4" ${fee.installments?.length === 4 ? 'selected':''}>4</option>
+                         <option value="5" ${fee.installments?.length === 5 ? 'selected':''}>5</option>
+                          <option value="6" ${fee.installments?.length === 6 ? 'selected':''}>6</option>
+                    </select>
+                     <div id="installment-dates-edit">
+                       ${fee.installments?.map((installment, index) => `
+                          <label for="installmentDateEdit${index + 1}">Data de Vencimento da Parcela ${index + 1}:</label>
+                          <input type="date" id="installmentDateEdit${index + 1}" value="${installment.date}" required>
+                        `).join('')}
+                   </div>
+               </div>
+                 <button type="submit" class="admin-button">Salvar</button>
+                 <button onclick="showFeesList(${fee.clientId})" class="admin-button">Voltar</button>
+             </form>
+          `;
+          const editFeesForm = document.getElementById('editFeesForm');
+           editFeesForm.addEventListener('submit', function(event){
+             event.preventDefault();
+               editFees(feeId);
+          });
+        const welcomeMessage = document.getElementById('welcome-message');
+            if(welcomeMessage){
+                welcomeMessage.style.display = 'none';
+            }
+    }
+        function showInstallmentsEdit(paymentMethod){
+         const installmentFields = document.getElementById('installment-fields-edit');
+        if(paymentMethod === 'parcelado'){
+              installmentFields.style.display = 'block';
+        }else{
+            installmentFields.style.display = 'none';
+        }
+    }
+      function generateInstallmentDatesEdit() {
+          const installmentCount = document.getElementById('installmentCountEdit').value;
+         const installmentDatesDiv = document.getElementById('installment-dates-edit');
+        installmentDatesDiv.innerHTML = ''; // Limpar campos existentes
+
+         for (let i = 1; i <= installmentCount; i++) {
+            const label = document.createElement('label');
+             label.textContent = `Data de Vencimento da Parcela ${i}:`;
+            const input = document.createElement('input');
+             input.type = 'date';
+            input.id = `installmentDateEdit${i}`;
+             input.required = true;
+              installmentDatesDiv.appendChild(label);
+              installmentDatesDiv.appendChild(input);
+        }
+   }
+     function editFees(feeId){
+        const feeIndex = fees.findIndex(fee => fee.id === feeId);
+         if(feeIndex !== -1){
+           const clientId = parseInt(document.getElementById('feesClientId').value);
+           const feesContractDate = document.getElementById('feesContractDate').value;
+            const feesValue = document.getElementById('feesValue').value;
+            const feesDate = document.getElementById('feesDate').value;
+            const feesPaymentMethod = document.getElementById('feesPaymentMethod').value;
+              let installments = [];
+
+            if (feesPaymentMethod === 'parcelado') {
+                const installmentCount = document.getElementById('installmentCountEdit').value;
+                   for (let i = 1; i <= installmentCount; i++) {
+                       const date = document.getElementById(`installmentDateEdit${i}`).value;
+                       installments.push({ date: date, paid: fees[feeIndex].installments[i-1]?.paid || false });
+                     }
+                }
+        fees[feeIndex] = {
+            id: feeId,
+            clientId: clientId,
+             feesName: fees[feeIndex].feesName,
+            feesRg: fees[feeIndex].feesRg,
+            feesCpf: fees[feeIndex].feesCpf,
+           contractDate: feesContractDate,
+            value: feesValue,
+            date: feesDate,
+            paymentMethod: feesPaymentMethod,
+           installments: installments
+        };
+        showFeesList(clientId);
+       }
+    }
+      function deleteFees(feeId){
+         const fee = fees.find(fee => fee.id === feeId);
+         fees = fees.filter(fee => fee.id !== feeId);
+        showFeesList(fee.clientId);
+    }
+    function showFeesDetails(feeId) {
+        const fee = fees.find(fee => fee.id === feeId);
+        const dynamicContent = document.getElementById('dynamic-content');
+          let paymentDetails = '';
+          if (fee.paymentMethod === 'parcelado' && fee.installments) {
+            paymentDetails = fee.installments.map((installment, index) => `
+                <p>
+                   Parcela ${index + 1}: Vencimento ${installment.date},
+                  ${installment.paid ? 'Paga' : 'Pendente'}
+               </p>
+             `).join('');
+        } else {
+            paymentDetails = `Forma de Pagamento: ${fee.paymentMethod}`;
+         }
+
+        dynamicContent.innerHTML = `
+                <h2>Detalhes do Honorário</h2>
+                <p><strong>Valor:</strong> ${fee.value}</p>
+                 <p><strong>Data do Contrato:</strong> ${fee.contractDate}</p>
+                <p><strong>Data:</strong> ${fee.date}</p>
+                 <p><strong>${paymentDetails}</p>
+                <button onclick="showFeesList(${fee.clientId})" class="admin-button">Voltar</button>
+            `;
+           const welcomeMessage = document.getElementById('welcome-message');
+            if(welcomeMessage){
+                welcomeMessage.style.display = 'none';
+            }
+    }
+   function showReports(){
+      const dynamicContent = document.getElementById('dynamic-content');
+      dynamicContent.innerHTML = `
+        <div class="admin-container">
+           <h2>Relatórios</h2>
+           <button class="admin-button" onclick="generateClientsReport()">Relatório de Clientes</button>
+           <button class="admin-button" onclick="generateProcessesReport()">Relatório de Processos</button>
+            <button class="admin-button" onclick="generateFeesReport()">Relatório de Honorários</button>
+             <button class="admin-button" onclick="generateGeneralReport()">Relatório Geral</button>
+           <button onclick="showClientDashboard()" class="admin-button">Voltar</button>
+       </div>
+       `;
+       const welcomeMessage = document.getElementById('welcome-message');
+            if(welcomeMessage){
+                welcomeMessage.style.display = 'none';
+            }
+
+   }
+   function generateClientsReport(){
+      const dynamicContent = document.getElementById('dynamic-content');
+        let reportHTML = `
+           <h2>Relatório de Clientes</h2>
+            <table class="client-list">
+              <thead>
+               <tr>
+                 <th>Nome</th>
+                   <th>RG</th>
+                  <th>CPF</th>
+                 <th>Telefone</th>
+                 <th>Email</th>
+                  <th>Endereço</th>
+                </tr>
+              </thead>
+             <tbody>
+          `;
+           clients.forEach(client => {
+               reportHTML += `
+                <tr>
+                     <td>${client.name}</td>
+                     <td>${client.rg}</td>
+                     <td>${client.cpf}</td>
+                    <td>${client.phone}</td>
+                   <td>${client.email}</td>
+                   <td>${client.address}</td>
+               </tr>
+              `;
+           });
+          reportHTML += `
+               </tbody>
+             </table>
+          <button onclick="showReports()" class="admin-button">Voltar</button>
+        `;
+      dynamicContent.innerHTML = reportHTML;
+     const welcomeMessage = document.getElementById('welcome-message');
+      if(welcomeMessage){
+          welcomeMessage.style.display = 'none';
+       }
+
+  }
+  function generateProcessesReport(){
+     const dynamicContent = document.getElementById('dynamic-content');
+    let reportHTML = `
+           <h2>Relatório de Processos</h2>
+            <table class="process-list">
+              <thead>
+               <tr>
+                  <th>Cliente</th>
+                  <th>Número do Processo</th>
+                  <th>Fórum</th>
+                 <th>Vara</th>
+                 <th>Juiz</th>
+                   <th>Réu</th>
+                </tr>
+             </thead>
+            <tbody>
+        `;
+        processes.forEach(process => {
+          const client = clients.find(client => client.id === process.clientId);
+          reportHTML += `
+             <tr>
+               <td>${client?.name || 'Cliente não encontrado'}</td>
+                 <td>${process.processNumber}</td>
+                <td>${process.processForum}</td>
+                <td>${process.processVara}</td>
+                 <td>${process.processJudge}</td>
+                 <td>${process.processDefendant}</td>
+              </tr>
+            `;
+        });
+       reportHTML += `
+         </tbody>
+       </table>
+     <button onclick="showReports()" class="admin-button">Voltar</button>
+       `;
+     dynamicContent.innerHTML = reportHTML;
+      const welcomeMessage = document.getElementById('welcome-message');
+     if(welcomeMessage){
+         welcomeMessage.style.display = 'none';
+      }
+  }
+    function generateFeesReport(){
+        const dynamicContent = document.getElementById('dynamic-content');
+        let reportHTML = `
+            <h2>Relatório de Honorários</h2>
+              <table class="fees-list">
+               <thead>
+                 <tr>
+                    <th>Cliente</th>
+                     <th>Valor</th>
+                     <th>Data do Contrato</th>
+                   <th>Data</th>
+                  <th>Forma de Pagamento</th>
+                </tr>
+                </thead>
+              <tbody>
+        `;
+        fees.forEach(fee => {
+         const client = clients.find(client => client.id === fee.clientId);
+             reportHTML += `
+            <tr>
+               <td>${client?.name || 'Cliente não encontrado'}</td>
+                <td>${fee.value}</td>
+                <td>${fee.contractDate}</td>
+                 <td>${fee.date}</td>
+                  <td>${fee.paymentMethod}</td>
+             </tr>
+            `;
+         });
+          reportHTML += `
+            </tbody>
+        </table>
+        <button onclick="showReports()" class="admin-button">Voltar</button>
+         `;
+       dynamicContent.innerHTML = reportHTML;
+       const welcomeMessage = document.getElementById('welcome-message');
+       if(welcomeMessage){
+          welcomeMessage.style.display = 'none';
+         }
+    }
+      function generateGeneralReport() {
+          const dynamicContent = document.getElementById('dynamic-content');
+           let reportHTML = `
+            <h2>Relatório Geral</h2>
+             <h3>Clientes</h3>
+             <table class="client-list">
+                 <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>RG</th>
+                       <th>CPF</th>
+                        <th>Telefone</th>
+                        <th>Email</th>
+                        <th>Endereço</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+          `;
+        clients.forEach(client => {
+            reportHTML += `
+               <tr>
+                    <td>${client.name}</td>
+                    <td>${client.rg}</td>
+                    <td>${client.cpf}</td>
+                    <td>${client.phone}</td>
+                    <td>${client.email}</td>
+                    <td>${client.address}</td>
+                 </tr>
+               `;
+            });
+            reportHTML += `
+               </tbody>
+             </table>
+           <h3>Processos</h3>
+            <table class="process-list">
+              <thead>
+                <tr>
+                   <th>Cliente</th>
+                   <th>Número do Processo</th>
+                    <th>Fórum</th>
+                   <th>Vara</th>
+                    <th>Juiz</th>
+                   <th>Réu</th>
+                </tr>
+                </thead>
+             <tbody>
+          `;
+        processes.forEach(process => {
+           const client = clients.find(client => client.id === process.clientId);
+             reportHTML += `
+                <tr>
+                   <td>${client?.name || 'Cliente não encontrado'}</td>
+                    <td>${process.processNumber}</td>
+                   <td>${process.processForum}</td>
+                    <td>${process.processVara}</td>
+                   <td>${process.processJudge}</td>
+                   <td>${process.processDefendant}</td>
+                </tr>
+              `;
+          });
+         reportHTML += `
+              </tbody>
+             </table>
+           <h3>Honorários</h3>
+          <table class="fees-list">
+               <thead>
+                    <tr>
+                     <th>Cliente</th>
+                       <th>Valor</th>
+                        <th>Data do Contrato</th>
+                      <th>Data</th>
+                       <th>Forma de Pagamento</th>
+                   </tr>
+                 </thead>
+              <tbody>
+         `;
+            fees.forEach(fee => {
+            const client = clients.find(client => client.id === fee.clientId);
+            reportHTML += `
+                <tr>
+                    <td>${client?.name || 'Cliente não encontrado'}</td>
+                    <td>${fee.value}</td>
+                     <td>${fee.contractDate}</td>
+                   <td>${fee.date}</td>
+                    <td>${fee.paymentMethod}</td>
+               </tr>
+             `;
+          });
+           reportHTML += `
+            </tbody>
+          </table>
+           <button onclick="showReports()" class="admin-button">Voltar</button>
+        `;
+      dynamicContent.innerHTML = reportHTML;
+       const welcomeMessage = document.getElementById('welcome-message');
+       if(welcomeMessage){
+           welcomeMessage.style.display = 'none';
+         }
+   }
+
     </script>
 </body>
 </html>
